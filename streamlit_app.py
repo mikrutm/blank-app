@@ -5,11 +5,12 @@ import pandas as pd
 uploaded_file = st.file_uploader("Wybierz plik CSV", type=["csv"])
 
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
-    
-    # Wyświetlenie DataFrame w Streamlit z możliwością sortowania
-    st.title("Wyświetlanie DataFrame w Streamlit")
-    st.write("Przykładowa tabela danych:")
-    st.dataframe(df, use_container_width=True)
+    try:
+        df = pd.read_csv(uploaded_file, sep=';', index_col=0)  # Ustawienie pierwszej kolumny jako indeks
+        
+        
+        st.dataframe(df, use_container_width=True, height=600)
+    except Exception as e:
+        st.error(f"Błąd podczas wczytywania pliku: {e}")
 else:
     st.write("Załaduj plik CSV, aby zobaczyć dane.")
