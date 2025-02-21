@@ -6,8 +6,7 @@ uploaded_file = st.file_uploader("Wybierz plik CSV", type=["csv"])
 
 if uploaded_file is not None:
     try:
-        df = pd.read_csv(uploaded_file, sep=';', index_col=0)  # Ustawienie pierwszej kolumny jako indeks
-        
+        df = pd.read_csv(uploaded_file, sep=';', index_col=0) 
         
         st.dataframe(df, use_container_width=True, height=600)
     except Exception as e:
